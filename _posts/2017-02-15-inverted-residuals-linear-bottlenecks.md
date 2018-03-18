@@ -5,43 +5,77 @@ title: MobileNet V2 A brief explanation and an implementation in PyTorch
 
 Inverted Residuals and Linear Bottlenecks by Sandler et. al introduces us to Google's new Mobile CNN Architecture MobileNet V2. In this post I'll first talk about the current state of Mobile CNN Architectures. I'll then provide a basic explanation of grouped convolutions and finally we'll dive into the architecture of the network. This post is also supplemented by a PyTorch implementation of the original paper.
 
-### Mobile Architectures
+### **Mobile Architectures**
 Mobile architectures for CNN's are designed to have the following properties:
 * Small model size
 * Fewer FLOPS
 * Fast at testing/ inference time.
 
-The move towards smaller architectures was started by SqueezeNet which demonstrated AlexNet level performances on ImageNet with a model size of less than 0.5MB. The next significant leap in mobile architectures was MobileNet Howard et al. This network capitalized on depthwise seperable convolutions to reduce the model size significantly whilst maintaining accuracy. ShuffleNet was another interesting architecture improving upon MobileNet. Its novelty was in reducing the parameters of pointwise convolutions by converting them into grouped pointwise convolutions and then shuffling the output channels so that the next set of grouped convolutions have groups whose inputs are nonconsecutive channels from the previous layers.
+The move towards smaller architectures was started by [SqueezeNet](https://arxiv.org/abs/1602.07360 "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size") which demonstrated **AlexNet level performances on ImageNet with a model size of less than 0.5MB.**
+
+The next significant leap in mobile architectures was [MobileNet](https://arxiv.org/abs/1704.04861 "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications") by Howard et al. This network capitalized on **depthwise seperable convolutions** to reduce the model size significantly whilst still maintaining accuracy.
+
+[ShuffleNet](https://arxiv.org/abs/1707.01083 "ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices") was another interesting architecture improving upon MobileNet. Its novelty was in reducing the parameters of pointwise convolutions by converting them into grouped pointwise convolutions and then **shuffling the output channels** so that the next set of grouped convolutions have groups whose inputs are nonconsecutive channels from the previous layers.
 
 ### Grouped Convolutions
 
 ![Grouped Convolutions]({{ "/assets/grouped-convolution.png" | absolute_url }})
-*Figure 1: Grouped Convolutions with $$N_i$$ = C input Channels, g groups, and $$N_o$$ = C' output Channels*
+*Figure 0: Grouped Convolutions with $$N_i$$ = C input Channels, g groups, and $$N_o$$ = C' output Channels*
 
-To understand most recent CNN architectures, its imperative to know what grouped convolutions are. Normal convolutions apply a $$K*K$$ filter across each of the $$N_i$$ input channels to generate each output channel. This means that for a total of $$N_o$$ output channels, the kernel tensor is of shape $$(K,K,N_i,N_o)$$. As we go deeper through the network, $$K$$ usually remains the same whilst $$N_i$$ and $$N_o$$ increase rapidly. Its clear to see now, why convolutional kernels have a large number of parameters deeper in the network due to the product of $$N_i$$ and $$N_o$$ each of which are relatively large numbers. For mobile networks which look to minimize the number of parameters replacing these regular convolutions with more efficient convolutions is necessary.
+To understand most recent CNN architectures, its imperative to know what grouped convolutions are. Normal convolutions apply a **$$K*K$$ filter across each of the $$N_i$$ input channels** to generate each output channel.
 
-Grouped convolutions try to solve this very problem. Let the number of channels in the input to the grouped convolutions be $$N_i$$, the number of desired output channels be $$N_o$$ and the group size be $$g$$ (this is an adjustable parameter). Sets of $$g$$ different input channels are selected, no channel being chosen more than once to form a group. You can think of this as slicing the input tensor along the channel dimension into $$N_i/g$$ blocks with $$g$$ channels each. For a better visual understanding of this, see Figure 1. Let's call the number of channels in each group $$N_{ig}$$ and the number of output channels for each group (divided equally) $$N_{og}$$. Now, a regular convolution is applied to each group, with each kernel of size $$(K,K,N_{ig},N_{og})$$. With $$g$$ such kernels, the total number of parameters for the entire grouped convolution is $$K*K*N_{ig}*N_{og}*g$$. Comparing this with a regular convolution with a kernel of size $$(K,K,N_i,N_o)$$, grouped convolutions have $$g$$x fewer parameters. The specific case with $$g$$ equal to $$N_i$$ and $$N_o$$ also equal to $$N_i$$ is called a depthwise convolution. In this sort of convolution, each of the $$N_i$$ filters of shape $$(K,K)$$ is applied only to one input channel and generates only one output channel.
+For a total of $$N_o$$ output channels, the kernel tensor is of shape $$(K,K,N_i,N_o)$$. As we go deeper through the network, $$K$$ usually remains the same whilst **$$N_i$$ and $$N_o$$ increase rapidly.**
+
+With a total of $$K*K*N_i*N_o$$ parameters, it is now clear to see, why convolutional kernels have a large number of parameters deeper in the network due to the **product of $$N_i$$ and $$N_o$$** each of which are relatively large numbers. 
+
+> **To minimize the number of parameters** replacing these regular convolutions with more efficient convolutions is necessary.
+
+Grouped convolutions try to solve this very problem. Let the number of channels in the input to the grouped convolutions be $$N_i$$, the number of desired output channels be $$N_o$$ and the group size be $$g$$.
+
+**Sets of $$g$$ different input channels are selected**, no channel being chosen more than once to form a group. You can think of this as slicing the input tensor along the channel dimension into $$N_i/g$$ blocks each with $$g$$ channels each. For a better visual understanding of this, see Figure 0.
+
+Let's call the number of channels in each group $$N_{ig}$$ and the number of output channels for each group (divided equally) $$N_{og}$$. Now, **a regular convolution is applied to each group**, with each kernel of size $$(K,K,N_{ig},N_{og})$$.
+
+With $$g$$ such kernels, the total number of parameters for grouped convolution is $$K*K*N_{ig}*N_{og}*g$$. Comparing this with a regular convolution with a kernel of size $$(K,K,N_i,N_o)$$, **grouped convolutions have $$g$$ times fewer parameters.**
+
+The specific case with **$$g$$ equal to $$N_i$$ and $$N_o$$ also equal to $$N_i$$ is called a depthwise convolution**. In this sort of convolution, each of the $$N_i$$ filters of shape $$(K,K)$$ is applied only to one input channel and generates only one output channel.
 
 ### Bottleneck Architecture
 
 ![MobileNetV2 Architecture]({{ "/assets/mobilenet_resnet.png" | absolute_url }})
 *Figure 1: MobileNetV2 Architecture, BN is used after every conv and is omitted for brevity*
 
-Similar to all popular CNN's today including all the ones we've talked about so far, MobileNetV2 follows a residual architecture, with a unique and efficient design for each bottleneck block (Figure 1). The block starts off with an 'expansion' pointwise convolution (1x1 conv) which expands the number of channels from $$N_i$$ to $$N_i*t$$, where $$t$$ is a tuneable parameter called the expansion coefficient. A depthwise convolution of kernel size $$(K,K)$$ is applied which performs a linear transformation of the input. The last layer of this block performs a 'squeeze' pointwise convolution which squeezes the number of channels to give an output with $$N_o$$ channels. $$N_o$$ is generally either $$N_i$$ or a number far smaller than $$N_i*t$$ which is why this has been referred to as a squeezing operation.
+Similar to all popular CNN's today including all the ones we've talked about so far, MobileNetV2 follows a residual architecture, with a unique and efficient design for each bottleneck block (Figure 1).
 
-The input is added elementwise through the residual path to the output at the last stage. In the case that the number of input channels $$N_i$$ is not equal to the number of output channels $$N_o$$ we assume that a pointwise conv is used along the residual path which has $$N_o$$ number of output channels. For bottleneck blocks with $$stride > 1$$, the stride is applied to the depthwise convolution. In this case, the width and height of the input and output map is different, hence the residual connection is omitted.
+The block starts off with an **expansion** pointwise convolution (1x1 conv) which **expands the number of channels** from $$N_i$$ to $$N_i*t$$, where $$t$$ is a tuneable parameter called the expansion coefficient.
+
+A **depthwise convolution** of kernel size $$(K,K)$$ is applied which performs a linear transformation of the input.
+
+The last layer of this block performs a **squeeze** pointwise convolution which **squeezes the number of channels** to give an output with $$N_o$$ channels. $$N_o$$ is generally either $$N_i$$ or a number far smaller than $$N_i*t$$ which is why this has been referred to as a squeezing operation.
+
+The input is added elementwise through the residual path to the output at the last stage. In the case that the number of input channels $$N_i$$ is not equal to the number of output channels $$N_o$$ we assume that a pointwise conv is used along the residual path which has $$N_o$$ number of output channels.
+
+For bottleneck blocks with $$stride > 1$$, the **stride is applied to the depthwise convolution**. In this case, the width and height of the input and output map is different, hence the residual connection is omitted.
 
 ### Inverted Residuals
 
-The original ResNet Bottleneck Block proposed by He et al. is shown in Figure 1b. At first glance, the new proposed Bottleneck block looks identical to the original one. The only difference is the number of output channels at each stage. In the original architecture, the first pointwise convolution squeezes the number of channels, and the last one expands it back to the original dimension. This is exactly the same as the proposed architecture except in an inverted order. The proposed architecture has the main benefit of lower memory consumption due to fewer channels at the residual connections.
+The original ResNet Bottleneck Block proposed by He et al. is shown in Figure 1b. At first glance, the new proposed Bottleneck block looks identical to the original one.
 
-The Bottleneck Block also has Batch Normalization after each convolutional layer and ReLU after all but the last Convolutional layer, the reason for omitting a ReLU in the last layer is explained in the next section.
+>The only difference is the number of output channels at each stage. In the original architecture, the first pointwise convolution squeezes the number of channels, and the last one expands it back to the original dimension. This is **exactly the same as the proposed architecture except in an inverted order.**
+
+The proposed architecture has the main benefit of **lower memory consumption** due to fewer channels at the residual connections. This is because the outputs of the residual blocks must be persisted as they have to be added to the output of the next residual block.
+
+The Bottleneck Block also has **Batch Normalization** after each convolutional layer and **ReLU after all but the last Convolutional layer**, the reason for omitting a ReLU in the last layer is explained in the next section.
 
 ### Linear Bottlenecks
 
-The authors assume that the information present in the tensor output of any layer of the network can be encoded into a lower dimensional space. This is the motivation behind reducing the number of filters in MobileNetV1 till this lower dimensional space fully spans the output tensor itself. They then argue that using a linear activation for the bottleneck layer is necessary because a non-linearity leads to loss of information after the last pointwise convolution in the block.
+>The authors assume that the **information present** in the tensor output of any layer of the network can be **encoded into a lower dimensional space**.
 
-In 'Indentity Mappings in Deep Residual Networks' He et. al, the proposed residual block also does not have any ReLU's either after the last convolution or after the shortcut addition. Their hypothesis was that adding a ReLU after the last convolution would lead to a non-negative tensor being propogated through the residual connection which will be monotonically increasing through the layers of the network. Indeed, both networks report a far lower testing accuracy with ReLU's after the last convolution. 
+This is the motivation behind reducing the number of filters in MobileNetV1 till this lower dimensional space fully spans the output tensor itself. They then argue that using a linear activation for the bottleneck layer is necessary because a **non-linearity leads to loss of information** after the last pointwise convolution in the block.
+
+In [Indentity Mappings in Deep Residual Networks](https://arxiv.org/abs/1603.05027 "Indentity Mappings in Deep Residual Networks") by He et. al, the proposed residual block also does not have any ReLU's either after the last convolution or after the shortcut addition.
+
+Their hypothesis was that adding a **ReLU after the last convolution** would lead to a **non-negative tensor** being propogated through the residual connection which will be **monotonically increasing** through the layers of the network. Indeed, both networks report a far lower testing accuracy with ReLU's after the last convolution. 
 
 ### Number of computations and paramters
 
