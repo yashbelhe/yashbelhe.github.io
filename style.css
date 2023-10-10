@@ -1,0 +1,50 @@
+* {
+  font-family: "Open Sans", sans-serif;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin: 10px 0px 0 0;
+}
+p {
+  font-size: 20px;
+}
+.proj_title {
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: blue;
+}
+
+a:hover {
+  color: red;
+}
+
+div {
+  font-size: 20px;
+}
+
+.teaser_img {
+  max-width: 1400px;
+  /* max-width: 100%; */
+  width: 100%;
+  /* width: 50%; */
+}
+
+video {
+  max-width: 1400px;
+  /* max-width: 100%; */
+  width: 100%;
+  /* width: 50%; */
+}
+
+#venue {
+  font-weight: bold;
+}

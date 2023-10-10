@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <title>Discontinuity-Aware 2D Neural Fields</title>
+</head>
+<body>
+
+<h1>Discontinuity-Aware 2D Neural Fields</h1>
+<div id="authors">
+  <a class='subtle' href='https://yashbelhe.github.io' target='_blank'>Yash Belhe</a>,
+  <a class='subtle' href='http://mgharbi.com' target='_blank'>Michaël Gharbi</a>,
+  <a class='subtle' href='https://techmatt.github.io' target='_blank'>Matthew Fisher</a>,
+  <a class='subtle' href='https://www.iliyan.com/' target='_blank'>Iliyan Georgiev</a>,
+  <a class='subtle' href='https://cseweb.ucsd.edu/~ravir/' target='_blank'>Ravi Ramamoorthi</a>,
+  <a class='subtle' href='https://cseweb.ucsd.edu/~tzli/' target='_blank'>Tzu-Mao Li</a></div>
+<div id="venue">SIGGRAPH Asia 2023 (journal)</div>
+
+<div id="teaser">
+  <div id="teaser_image"><a href="title.jpg" title="view in full size" target="_blank"><img src="title.jpg" class="teaser_img"/></a></div>
+  <div id="teaser_caption">We introduce a neural-mesh-based representation that can preserve sharp discontinuities (linear and curved) provided as input, at arbitrary resolution for a variety of two-dimensional signals. (a) Rendering comparison to InstantNGP and ReLU fields at 100x zoom, showing how we maintain sharp structures while previous methods blur the image. (b-e) Example uses of our method for fitting solutions to walk-on-spheres-based diffusion curves, partial differential equations, and physics-informed neural networks. In all cases, discontinuities are specified by curves.
+  </div>
+</div>
+
+<h2>Abstract</h2>
+<div id="abstract">
+  <p>Neural image representations offer the possibility of high fidelity, compact storage, and resolution-independent accuracy, providing an attractive alternative to traditional pixel- and grid-based representations. However, coordinate neural networks fail to capture discontinuities present in the image and tend to blur across them; we aim to address this challenge. In many cases, such as rendered images, vector graphics, diffusion curves, or solutions to partial differential equations, the locations of the discontinuities are known. We take those locations as input, represented as linear, quadratic, or cubic \bez curves, and construct a feature field that is discontinuous across these locations and smooth everywhere else. Finally, we use a shallow multi-layer perceptron to decode the features into the signal value. To construct the feature field, we develop a new data structure based on a curved triangular mesh, with features stored on the vertices and on a subset of the edges that are marked as discontinuous. We show that our method can be used to compress a 100,000^2-pixel rendered image into a 25MB file; can be used as a new diffusion-curve solver by combining with Monte-Carlo-based methods or directly supervised by the diffusion-curve energy; or can be used for compressing 2D physics simulation data.</p>            </div>
+
+<h2>Downloads and links</h2>
+<div id="downloads">
+  <ul>
+    <li><a class="file" href="DiscontinuityAwareNeuralFields_SigAsia2023.pdf" onmouseup="TrackEvent('Publication', 'Download', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023.pdf')"onclick="TrackEvent('Publication', 'Download Click', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023.pdf')" target="_blank" ><i class="icon icon_document"></i>paper</a> <span class="file_info"> (PDF, 7 MB)</span></li>
+    <li><a class="file" href="DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.mp4" onmouseup="TrackEvent('Publication', 'Download', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.mp4')"onclick="TrackEvent('Publication', 'Download Click', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.mp4')" target="_blank" ><i class="icon icon_video"></i>supplemental video</a> <span class="file_info"> (MP4, 13 MB)</span></li>
+    <li><a class="file" href="DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.pdf" onmouseup="TrackEvent('Publication', 'Download', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.pdf')"onclick="TrackEvent('Publication', 'Download Click', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.pdf')" target="_blank" ><i class="icon icon_document"></i>supplemental document</a> <span class="file_info"> (PDF, 1.9 MB)</span></li>
+    <li><a class="file" href="DiscontinuityAwareNeuralFields_SigAsia2023.bib" onmouseup="TrackEvent('Publication', 'Download', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023.bib')"onclick="TrackEvent('Publication', 'Download Click', 'DiscontinuityAwareNeuralFields DiscontinuityAwareNeuralFields_SigAsia2023.bib')" target="_blank" ><i class="icon icon_citation"></i>citation</a> <span class="file_info"> (BIB)</span></li>
+  </ul>
+</div>                     
+<h2>Media</h2>
+<div class="video-container">
+<h3 style="text-align: left; margin-bottom: 5px; margin-top: 30px; font-size: 130%">Supplemental video</h3>  <video style="width: 100%; border: 1px solid #c7c7c7" controls><source src="DiscontinuityAwareNeuralFields_SigAsia2023_supplemental.mp4" type="video/mp4"></video>  </div>
+
+<h2>BibTeX reference</h2>
+<div class="code">
+  <pre>@article{Belhe:2023:DiscontinuityAwareNeuralFields,
+author = {Yash Belhe and Micha\&quot;{e}l Gharbi and Matthew Fisher and Iliyan Georgiev and Ravi Ramamoorthi and Tzu-Mao Li},
+title = {Discontinuity-aware 2D neural fields},
+journal = {ACM Transactions on Graphics (Proceedings of SIGGRAPH Asia)},
+year = {2023},
+volume = {41},
+number = {6},
+doi = {10.1145/3550454.3555484}
+}</pre>
+</div>
+
+</body>
+</html> 
