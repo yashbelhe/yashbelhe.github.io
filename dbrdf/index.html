@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <title>Importance Sampling BRDF Derivatives</title>
+</head>
+<body>
+
+<h1>Importance Sampling BRDF Derivatives</h1>
+<div id="authors">
+  <a class='subtle' href='https://yashbelhe.github.io' target='_blank'>Yash Belhe</a>,
+  <a class='subtle' href='https://bingxu.tech/' target='_blank'>Bing Xu</a>,
+  <a class='subtle' href='http://people.csail.mit.edu/sbangaru/' target='_blank'>Sai Praveen Bangaru</a>,
+  <a class='subtle' href='https://cseweb.ucsd.edu/~ravir/' target='_blank'>Ravi Ramamoorthi</a>,
+  <a class='subtle' href='https://cseweb.ucsd.edu/~tzli/' target='_blank'>Tzu-Mao Li</a></div>
+<div id="venue">SIGGRAPH Asia 2023 (journal)</div>
+
+<div id="teaser">
+  <div id="teaser_image"><a href="title.jpg" title="view in full size" target="_blank"><img src="title.jpg" class="teaser_img"/></a></div>
+  <!-- <div id="teaser_caption">We propose new importance sampling techniques for sampling derivatives of BRDFs , and they achieve significant variance reduction in the estimated derivatives. Our techniques work better because they correctly deal with real-valued BRDF derivatives, for which BRDF importance sampling from forward rendering is not well suited. Our techniques are general and apply to a wide variety of BRDF derivatives, which was not possible by previous work in differentiable rendering [Zeltner et al. 2021; Zhang et al. 2021a]. 3D models courtesy of Turbosquid users id_inc (teapot), Evilordus (lion), Adrian Kulawik (hydrant), 3d_molier International (cactus), cgaustria (fish vase).
+  </div> -->
+</div>
+
+<h2>Abstract</h2>
+<div id="abstract">
+  <p>We propose a set of techniques to efficiently importance sample the deriva- tives of a wide range of BRDF models. In differentiable rendering, BRDFs are replaced by their differential BRDF counterparts which are real-valued and can have negative values. This leads to a new source of variance arising from their change in sign. Real-valued functions cannot be perfectly importance sampled by a positive-valued PDF, and the direct application of BRDF sam- pling leads to high variance. Previous attempts at antithetic sampling only addressed the derivative with the roughness parameter of isotropic micro- facet BRDFs. Our work generalizes BRDF derivative sampling to anisotropic microfacet models, mixture BRDFs, Oren-Nayar, Hanrahan-Krueger, among other analytic BRDFs.
+    </p>
+    <p>
+  Our method first decomposes the real-valued differential BRDF into a sum of single-signed functions, eliminating variance from a change in sign. Next, we importance sample each of the resulting single-signed functions separately. The first decomposition, positivization, partitions the real-valued function based on its sign, and is effective at variance reduction when appli- cable. However, it requires analytic knowledge of the roots of the differential BRDF, and for it to be analytically integrable too. Our key insight is that the single-signed functions can have overlapping support, which significantly broadens the ways we can decompose a real-valued function. Our product and mixture decompositions exploit this property, and they allow us to support several BRDF derivatives that positivization could not handle. For a wide variety of BRDF derivatives, our method significantly reduces the variance (up to 58x in some cases) at equal computation cost and enables better recovery of spatially varying textures through gradient-descent-based inverse rendering.
+</p>            </div>
+
+<h2>Downloads and links</h2>
+<div id="downloads">
+  <ul>
+    <li><a class="file" href="ImportanceSamplingBRDFDerivativesTOG.pdf"><i class="icon icon_document"></i>paper</a> <span class="file_info"> (PDF, 20 MB)</span></li>
+  </ul>
+</div>
+<h2>BibTeX reference</h2>
+<div class="code">
+  <pre>@article{Belhe:2024:ImportanceSamplingBRDFDerivatives,
+author = {Yash Belhe and Bing Xu and Sai Praveen Bangaru and Ravi Ramamoorthi and Tzu-Mao Li},
+title = {Importance Sampling BRDF Derivatives},
+journal = {ACM Transactions on Graphics},
+year = {2024},
+}</pre>
+</div>
+
+</body>
+</html> 
