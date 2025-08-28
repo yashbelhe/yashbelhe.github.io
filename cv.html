@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Belhe - CV</title>
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        .header {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+        }
+        .contact-info {
+            font-size: 16px;
+        }
+        .contact-info .email {
+            margin: 5px 0;
+        }
+        .contact-info .website {
+            margin: 5px 0;
+        }
+        .contact-info a {
+            color: blue;
+            text-decoration: underline;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h2 {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: none;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #000;
+        }
+        .section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+        }
+        .education-item, .experience-item {
+            margin-bottom: 15px;
+        }
+        .education-item .institution, .experience-item .company {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .education-item .location {
+            font-weight: normal;
+            font-size: 16px;
+        }
+        .education-item .dates, .experience-item .dates {
+            font-weight: normal;
+            font-size: 16px;
+        }
+        .education-item .degree, .experience-item .title {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .education-item .advisor, .experience-item .description {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .project {
+            margin-bottom: 20px;
+        }
+        .project .title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .project .venue {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .project .authors {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .project .authors b {
+            font-weight: bold;
+        }
+        .project .abstract {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .equal-contribution {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .note {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .skills {
+            font-size: 16px;
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Yash Belhe</h1>
+        <div class="contact-info">
+            <div class="email">ybelhe@ucsd.edu</div>
+            <div class="website"><a href="https://yashbelhe.github.io">https://yashbelhe.github.io</a></div>
+        </div>
+    </div>
+
+    <div class="section">
+            <h2>Areas of Interest</h2>
+    <p>(differentiable) rendering, generative AI and 3D vision</p>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <div class="education-item clearfix">
+            <div class="institution">University of California, San Diego</div>
+            <div class="degree">PhD in Computer Science and Engineering</div>
+            <div class="advisor">Advised by Ravi Ramamoorthi and Tzu-Mao Li</div>
+            <div class="dates">September 2021 - Now</div>
+        </div>
+        
+        <div class="education-item clearfix">
+            <div class="institution">Carnegie Mellon University</div>
+            <div class="degree">Master of Science in Electrical and Computer Engineering</div>
+            <div class="advisor">Advised by Aswin Sankaranarayanan</div>
+            <div class="dates">December 2020</div>
+        </div>
+        
+        <div class="education-item clearfix">
+            <div class="institution">Indian Institute of Technology, Guwahati</div>
+            <div class="degree">Bachelor of Technology in Electronics and Communication Engineering</div>
+            <div class="advisor">Minor in Computer Science Engineering</div>
+            <div class="dates">May 2019</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Research</h2>
+        
+        <div class="project">
+            <div class="title">1. Repurposing Marigold for Zero-Shot Metric Depth Estimation via Defocus Blur Cues</div>
+            <div class="venue">arXiv preprint, 2025</div>
+            <div class="authors">Chinmay Talegaonkar, Nikhil Gandudi Suresh, Zachary Novack, <b>Yash Belhe</b>, Priyanka Nagasamudra, Nicholas Antipa</div>
+            <div class="abstract">Turning relative depth estimators into absolute ones by using defocus blur cues.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">2. A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization</div>
+            <div class="venue">ICCV 2025</div>
+            <div class="authors">Chi-Jui Ho, <b>Yash Belhe</b>, Steve Rotenberg, Ravi Ramamoorthi, Tzu-Mao Li, Nicholas Antipa</div>
+            <div class="abstract">Efficient wave-optics-based optimization of computational imaging systems.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">3. Volumetrically Consistent 3D Gaussian Rasterization</div>
+            <div class="venue">CVPR 2025 (Highlight)</div>
+            <div class="authors">Chinmay Talegaonkar, <b>Yash Belhe</b>, Ravi Ramamoorthi, Nicholas Antipa</div>
+            <div class="abstract">(Mostly) mathematically correct 3D Gaussian rasterization using analytic integration.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">4. Spatiotemporal Bilateral Filtering for Inverse Rendering</div>
+            <div class="venue">SIGGRAPH Asia 2024 (Conference)</div>
+            <div class="authors">Wesley Chang*, Xuanda Yang*, <b>Yash Belhe*</b>, Ravi Ramamoorthi, Tzu-Mao Li</div>
+            <div class="equal-contribution">(*=equal contribution)</div>
+            <div class="abstract">Discontinuity-preserving spatio-temporal optimizer to accelerate inverse rendering of volumes, textures, meshes.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">5. BSDF Importance Sampling using a Diffusion Model</div>
+            <div class="venue">SIGGRAPH Asia 2024 (Conference)</div>
+            <div class="authors">Ziyang Fu, <b>Yash Belhe</b>, Haolin Lu, Liwen Wu, Bing Xu, Tzu-Mao Li</div>
+            <div class="abstract">A low-dimensional diffusion model to importance sample reflective and transmissive materials well in real-time.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">6. A Construct-Optimize Approach to Sparse View Synthesis without Camera Pose</div>
+            <div class="venue">SIGGRAPH 2024 (Conference)</div>
+            <div class="authors">Kaiwen Jiang, Yang Fu, Mukund Varma T, <b>Yash Belhe</b>, Xiaolong Wang, Hao Su, Ravi Ramamoorthi</div>
+            <div class="abstract">Sparse view synthesis without camera poses progressively adding camera views and refining the solution.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">7. Importance Sampling BRDF Derivatives</div>
+            <div class="venue">Transactions on Graphics 2024 (Journal)</div>
+            <div class="authors"><b>Yash Belhe</b>, Bing Xu, Sai Praveen Bangaru, Tzu-Mao Li, Ravi Ramamoorthi</div>
+            <div class="abstract">Variance reduction for BRDF derivatives by removing variance due to sign changes.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">8. Discontinuity-Aware 2D Neural Fields</div>
+            <div class="venue">SIGGRAPH Asia 2023 (Journal)</div>
+            <div class="authors"><b>Yash Belhe</b>, Michael Gharbi, Matt Fisher, Iliyan Georgiev, Ravi Ramamoorthi, Tzu-Mao Li</div>
+            <div class="abstract">A new hybrid-neural-mesh image format for infinite resolution images in which edges are always sharp.</div>
+        </div>
+
+        <div class="project">
+            <div class="title">9. Computational Imaging using Ultrasonically-Sculpted Virtual Lenses</div>
+            <div class="venue">ICCP 2022</div>
+            <div class="authors">Hossein Baktash, <b>Yash Belhe</b>, Matteo G. Scopelliti, Yi Hua, Aswin Sankaranarayanan, Maysamreza Chamanzar</div>
+            <div class="abstract">Reconstruct sharp images from blurry measurements from a virtual GRIN lens sculpted using ultrasound waves.</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Talks</h2>
+        <p>Intel Graphics (Feb 2024) – Importance Sampling BRDF Derivatives</p>
+    </div>
+
+    <div class="section">
+        <h2>Honors and Awards</h2>
+        <p>UCSD Jacobs School of Engineering (JSOE) PhD Fellowship (Sept 2021)</p>
+        <p>Graduated MS in ECE with 4.0/4.0 GPA at CMU (Dec 2020)</p>
+        <p>Rank ~600 out of 1,200,000 applicants - IIT JEE Mains (Mar 2015)</p>
+        <p>Rank ~1600 out of 150,000 applicants - IIT JEE Advanced (May 2015)</p>
+    </div>
+
+    <div class="section">
+        <h2>Work Experience</h2>
+        <div class="experience-item clearfix">
+            <div class="company">PathAI Inc., Boston, USA</div>
+            <div class="dates">Feb 2021 - Sept 2021</div>
+            <div class="title">Machine Learning Engineer</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Internships</h2>
+        <div class="experience-item clearfix">
+            <div class="company">NVIDIA Research (with Thomas Müller, Merlin-Nimier David and Alex Keller)</div>
+            <div class="dates">June 2024 - Sept 2024</div>
+            <div class="title">Research Scientist Intern</div>
+        </div>
+        
+        <div class="experience-item clearfix">
+            <div class="company">Adobe Research (with Iliyan Georgiev and Michael Gharbi)</div>
+            <div class="dates">June 2023 - Sept 2023</div>
+            <div class="title">Research Scientist Intern</div>
+        </div>
+        
+        <div class="experience-item clearfix">
+            <div class="company">Adobe Research (with Michael Gharbi, Iliyan Georgiev and Matt Fisher)</div>
+            <div class="dates">June 2022 - Sept 2022</div>
+            <div class="title">Research Scientist Intern</div>
+        </div>
+        
+        <div class="experience-item clearfix">
+            <div class="company">PathAI Inc.</div>
+            <div class="dates">May 2020 - Aug 2020</div>
+            <div class="title">Machine Learning Intern</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Teaching Assistant</h2>
+        <p>UCSD: CSE-167 Computer Graphics, with Ravi Ramamoorthi (Jan 2023 - Mar 2023)</p>
+        <p>CMU: 11-785 Deep Learning, with Bhiksha Raj (Jan 2020 - May 2020)</p>
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+            <p>Programming Languages - Python, C++ C, Slang, CUDA. Frameworks: PyTorch, JAX, Mitsuba, Tensorflow, OptiX.</p>
+        </div>
+    </div>
+</body>
+</html> 
