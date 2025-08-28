@@ -13,6 +13,14 @@ p {
 }
 .proj_title {
   font-size: 18px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.proj_title:hover {
+  background-color: #f8f8f8;
+  border-radius: 4px;
 }
 
 .highlighted {
@@ -32,6 +40,14 @@ a:link, a:visited {
 
 a:hover {
   color: red;
+}
+
+.subtle {
+  color: black;
+}
+
+.proj_title br + b {
+  color: black;
 }
 
 div {
