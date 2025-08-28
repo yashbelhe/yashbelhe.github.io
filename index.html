@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<img src="img/yash.jpg" alt="Yash Belhe" style="max-width: 240px; height: auto; margin-bottom: 20px; margin-left: -30px; margin-top: 20px; padding-top: 20px; padding-bottom: 20px; display: block; image-orientation: from-image; transform: rotate(-90deg);">
+
 <h1>Yash Belhe</h1>
 <p>ybelhe@ucsd.edu</p>
 
@@ -25,11 +27,14 @@
 </p>
 
 <h2>Papers</h2>
-  <p style="font-size: 16px; color: #666; font-style: italic;">
-    <span style="background-color: #fffacd; padding: 2px 6px; border-radius: 3px; border-left: 3px solid #ffd700;">Highlighted papers</span>. * = equal contribution.
-  </p>
-<ul>
-  <li>
+<p style="font-size: 16px; color: #666; font-style: italic;">
+  <span style="background-color: #fffacd; padding: 2px 6px; border-radius: 3px; border-left: 3px solid #ffd700;">Highlighted papers</span>. * = equal contribution.
+</p>
+<button id="togglePapers" onclick="togglePapers()" style="background: none; border: none; color: #666; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: 16px; padding: 0; margin-bottom: 15px;">
+  Show All Papers
+</button>
+<ul id="papersList">
+  <li class="non-highlighted">
     <a href="https://arxiv.org/pdf/2505.17358" class="proj_title">
       <b>Repurposing Marigold for Zero-Shot Metric Depth Estimation via Defocus Blur Cues</b>
       <br/>
@@ -45,7 +50,7 @@
       <span class='subtle'>Turning relative depth estimators into absolute ones by using defocus blur cues.</span>
     </a>
   </li>
-  <li>
+  <li class="non-highlighted">
     <a href="https://jerryhotaiwan.github.io/diff_wave_optics/" class="proj_title">
       <b>A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization</b>
       <br/>
@@ -61,7 +66,7 @@
       <span class='subtle'>Efficient wave-optics-based optimization of computational imaging systems.</span>
     </a>
   </li>
-  <li>
+  <li class="highlighted">
     <a href="https://chinmay0301.github.io/vol3dgs/" class="proj_title">
       <b>Volumetrically Consistent 3D Gaussian Rasterization</b>
       <br/>
@@ -90,7 +95,7 @@
       <span class='subtle'>Discontinuity-preserving spatio-temporal optimizer to accelerate inverse rendering of volumes, textures, meshes.</span>
     </a>
   </li>
-  <li>
+  <li class="non-highlighted" style="display: none;">
     <a href="https://fzy28.github.io/BSDF_diffusion_sampling_web/" class="proj_title">
       <b>BSDF importance sampling using a diffusion model</b>
       <br/>
@@ -106,7 +111,7 @@
       <span class='subtle'>A low-dimensional diffusion model to importance sample reflective and transmissive materials well in real-time.</span>
     </a>
   </li>
-  <li>
+  <li class="non-highlighted" style="display: none;">
     <a href="https://raymondjiangkw.github.io/cogs.github.io/" class="proj_title">
       <b>A Construct-Optimize Approach to Sparse View Synthesis without Camera Pose</b>
       <br/>
@@ -154,7 +159,7 @@
       <span class='subtle'>A new hybrid-neural-mesh image format for infinite resolution images in which edges are always sharp.</span>
     </a>
   </li>
-  <li>
+  <li class="non-highlighted" style="display: none;">
     <a href="http://imagesci.ece.cmu.edu/files/paper/2022/DeblurUS_ICCP22.pdf" class="proj_title">
       <b>Computational Imaging using Ultrasonically-Sculpted Virtual Lenses</b>
       <br/>
@@ -170,18 +175,36 @@
       <span class='subtle'>Reconstruct sharp images from blurry measurements from a virtual GRIN lens sculpted using ultrasound waves.</span>
     </a>
   </li>
-  <!-- <li>
-    <b>
-      <a href="https://jitc.bmj.com/content/10/Suppl_2/A579" class="proj_title">
-      554 Artificial intelligence (AI)-powered immune phenotyping of advanced or metastatic urothelial carcinoma (aUC) clinical trial samples from hematoxylin and eosin (H&E)-stained whole slide images (WSI).
-      </a>
-    </b>
-    <br/>
-    Jake Conway, Limin Yu, Yash Belhe, Suyog Jain, Hans Grote, Mary Lin, Benjamin Trotter, Darpan Sanghavi, Aslihan Gerhold-Ay, XiaoZhe Wang, Sergine Brutus and Thomas Mrowiec
-    <br/>
-    Journal for ImmunoTherapy of Cancer, 2022.
-  </li> -->
-</ul> 
+</ul>
 
+<script>
+function togglePapers() {
+  const nonHighlighted = document.querySelectorAll('.non-highlighted');
+  const button = document.getElementById('togglePapers');
+  const isExpanded = nonHighlighted[0].style.display !== 'none';
+  
+  if (isExpanded) {
+    // Collapse - hide non-highlighted papers
+    nonHighlighted.forEach(paper => {
+      paper.style.display = 'none';
+    });
+    button.textContent = 'Show All Papers';
+  } else {
+    // Expand - show all papers
+    nonHighlighted.forEach(paper => {
+      paper.style.display = 'block';
+    });
+    button.textContent = 'Show Highlighted Only';
+  }
+}
+
+// Initialize: show only highlighted papers by default
+document.addEventListener('DOMContentLoaded', function() {
+  const nonHighlighted = document.querySelectorAll('.non-highlighted');
+  nonHighlighted.forEach(paper => {
+    paper.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html> 

@@ -1,6 +1,7 @@
 * {
   font-family: "Open Sans", sans-serif;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -49,7 +50,7 @@ a:hover {
 
 .proj_title .subtle:last-child {
   color: #666 !important;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 .proj_title br + b {
