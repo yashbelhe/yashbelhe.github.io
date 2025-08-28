@@ -15,6 +15,13 @@ p {
   font-size: 18px;
 }
 
+.highlighted {
+  background-color: #fffacd;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 4px solid #ffd700;
+}
+
 a {
   text-decoration: none;
 }
